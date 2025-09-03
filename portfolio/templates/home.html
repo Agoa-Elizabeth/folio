@@ -1,0 +1,163 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Home{% endblock %}
+{% block content %}
+
+<!-- Hero Section with Image Side by Side -->
+<div class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-md-8 text-center text-md-start mb-4 mb-md-0">
+      <br />
+      <h1 class="display-4 fw-bold">
+        Hello! I'm <strong>Elizabeth Agoa</strong>
+      </h1>
+      <h2 class="lead">
+        I design and build full-stack web applications using Django and modern
+        tools.
+      </h2>
+      <div class="col-md-8">
+        <h2 class="mb-3"></h2>
+        <h4>
+          Hello! I'm <strong>Elizabeth Agoa</strong>, a passionate software
+          developer based in Kampala. I specialize in building backend web
+          applications with <strong>Django</strong>, <strong>Html</strong>, and
+          <strong>Bootstrap</strong>.
+        </h4>
+        <h4>
+          With a background in Certificate in software engeering with python and
+          still learning and advancing , I enjoy creating clean, responsive, and
+          functional websites that solve real-world problems. I'm always eager
+          to learn new technologies and collaborate on exciting projects.
+        </h4>
+        <h4>
+          In my free time, I love contributing to open-source, talking and
+          encouraging my fellow youth mostly young girls that the tech world is
+          not only for men, and exploring UX design trends.
+        </h4>
+        <a
+          href="{% static 'CSS/images/Agoa Elizabeth.CV.pdf' %}"
+          class="btn btn-outline-primary mt-3"
+          target="_blank"
+          >Download CV</a
+        >
+      </div>
+      <br />
+      <a href="" class=""></a>
+    </div>
+    <div class="col-md-4 text-center">
+      <img
+        src="{% static 'CSS/images/liz.jpg' %}"
+        alt="liz"
+        class="img-fluid rounded-circle"
+      />
+    </div>
+  </div>
+</div>
+
+<!-- Skills Section -->
+<div class="container my-5">
+  <br />
+  <h1 class="text-center mb-4">Skills & Technologies</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-3 mb-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <h4 class="card-title">
+            <i class="fa-brands fa-python fa-xl"></i>Python & Django
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <h4 class="card-title">
+            <i class="fa-brands fa-html5 fa-xl" style="color: #e85617"></i>HTML
+            <br />
+            <br />
+            <i class="fa-brands fa-css3 fa-xl" style="color: #3671d9"></i>CSS
+            <br />
+            <br />
+            <i class="fa-brands fa-bootstrap fa-xl" style="color: #430576"></i>
+            Bootstrap
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <h4 class="card-title">
+            <i class="fa-brands fa-js fa-xl" style="color: #ffd43b"></i>
+            JavaScript <br />
+            <br />
+            <i class="fa-brands fa-react fa-xl" style="color: #74c0fc"></i>
+            React
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <h4 class="card-title">
+            <i class="fa-brands fa-github fa-xl" style="color: #00040a"></i> Git
+            <br />
+            <br />
+            <i class="fa-brands fa-docker fa-xl" style="color: #05327f"></i
+            >Docker
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--experience and skills-->
+<div class="container my-5">
+  <br />
+  <h1 class="text-center mb-4">Experience & Skills</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Soft Skills</h1>
+      <ul>
+        <li>communication</li>
+        <li>Problem Solving</li>
+        <li>Leadership</li>
+        <li>Leadership - (Working with a group or collaboration)</li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h1>Experience</h1>
+      <ul>
+        <li>Freelance Web Developer (2025–Present)</li>
+        <li>Hands on experience 2025</li>
+        <li>Personal Projects – E-commerce store, Portfolio site</li>
+      </ul>
+    </div>
+    <br />
+    <br />
+    <br />
+    <!--<div class="col-md-6">
+      <h5>Technical Skills</h5>
+      <ul>
+        <li><strong> Python, Django, REST APIs</strong></li>
+        <li><strong>HTML5, CSS3, Bootstrap, Tailwind</strong> </li>
+        <li><strong>Wordpress, Wampserver, PHP</strong> </li>
+        <li>SQL, PostgreSQL, SQLite</li>
+        <li>Git, GitHub, Docker</li>
+      </ul>
+    </div>-->
+  </div>
+</div>
+
+<!--contact-->
+<div class="container text-center my-5">
+  <br />
+  <h4>Want to collaborate or hire me?</h4>
+  <p>I'm open to freelance projects, internships. Let's connect!</p>
+  <a href="/contact/" class="btn btn-outline-primary">Contact Me</a><br />
+  <br />
+</div>
+
+<!-- Footer -->
+
+{% endblock %}

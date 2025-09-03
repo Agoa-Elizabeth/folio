@@ -1,0 +1,140 @@
+{% extends 'base.html' %} {% load static %} {% block title %}KGL Inventory
+System{% endblock %} {% block content %}
+
+<div class="container my-5">
+  <h1 class="text-center mb-5">KGL Inventory System</h1>
+  <div class="row align-items-center">
+    <!-- Image on the left -->
+    <div class="col-md-6 mb-4 mb-md-0">
+      <h1>KGL Inventory System</h1>
+      <br />
+      <br />
+      <img
+        src="{% static 'CSS/images/Screenshot 2025-08-07 085526.png' %}"
+        alt="KGL Inventory"
+        class="img-fluid rounded shadow"
+      />
+      <br />
+      <br />
+      <h3>Workflow & Business Logic:</h3>
+      <ul>
+        <li>Only the manager can record procurements.</li>
+        <li>Sales agents can only sell in-stock items.</li>
+        <li>Inventory levels are automatically updated on each sale.</li>
+        <li>Trusted buyers are handled via a separate credit sales module.</li>
+        <li>
+          Mr. Orban (Director) can view only aggregated reports for all
+          branches.
+        </li>
+      </ul>
+
+      <h3>Key Features:</h3>
+      <ul>
+        <li>
+          <p>
+            <strong>Procurement module :</strong>Only the manager can record
+            procurements.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Sales & Stock Control :</strong> Real-time stock updates
+            upon sales, with notifications when stock runs out.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Credit Sales Tracking :</strong>Separate interface for
+            deferred payments, including due dates and buyer details.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Admin Dashboard :</strong> Role-based dashboards with custom
+            views — including a summary report for the director showing totals
+            only.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Validation & UX :</strong>Clean forms with robust
+            validations to avoid human error and streamline workflows.
+          </p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Text on the right -->
+    <div class="col-md-6">
+      <h3>Karibu Groceries LTD Wholesale Produce Management System</h3>
+      <h5>Project Overview:</h5>
+      <p>
+        Karibu Groceries LTD (KGL) is a wholesale distributor of cereals like
+        Beans, Grain Maize, Cow Peas, G-nuts, and Soybeans, operating across two
+        branches. Traditionally, KGL recorded all business operations manually
+        using ruled black books, leading to inefficiencies and a lack of
+        centralized tracking. To address these issues, I developed a
+        comprehensive web-based management system tailored to KGL’s workflows.
+        The platform digitizes procurement, stock tracking, sales (cash and
+        credit), and role-based access for different user types — all aligned
+        with the company's specific rules and operations.
+      </p>
+
+      <h2>How I Built It:</h2>
+      <p><strong>Tech Used:</strong> Django, Bootstrap, SQLite, HTML, CSS</p>
+      <p>
+        <strong>Frontend:</strong> HTML and CSS (with Bootstrap) for layout and
+        styling. Forms and pages were built with Django’s templating engine,
+        ensuring clean and responsive UI without relying on JavaScript.
+      </p>
+
+      <p>
+        <strong>Backend:</strong> Python with the Django framework was used to
+        implement all business logic, manage views, and handle form submissions
+        securely.
+      </p>
+
+      <p>
+        <strong>Database:</strong> Db.sqlite3 was used as the primary database
+        to store structured data including users, procurement records, stock
+        levels, sales entries, and credit sales.
+      </p>
+
+      <p>
+        <strong>Authentication:</strong> Implemented role-based access control
+        using Django’s authentication system. User roles (Manager, Sales Agent,
+        Director) are enforced throughout the system to ensure proper data
+        access and control.
+      </p>
+
+      <p>
+        <strong>Data Validation:</strong> Used Django forms and model
+        validations to enforce input rules such as valid phone numbers, national
+        ID formats (NIN), numeric-only fields, and minimum character lengths.
+      </p>
+    </div>
+  </div>
+  <div
+    class="card mt-4 p-4 shadow-sm rounded"
+    style="background-color: #f8f9fa"
+  >
+    <h4 class="mb-3">Impact</h4>
+    <p style="color: #007bff">
+      The solution helped KGL move from outdated, error-prone manual systems to
+      a digital workflow that improves accuracy, visibility, and
+      decision-making. It enables the company to scale operations confidently
+      and eliminates the bottlenecks caused by physical record-keeping.
+    </p>
+  </div>
+  <br />
+  <br />
+  <a
+    href="https://github.com/Agoa-Elizabeth/kgl_project"
+    target="_blank"
+    class="btn btn-outline-primary"
+    >GitHub Repo</a
+  >
+  <a href="/projects/" class="btn btn-outline-primary">Back to Projects</a>
+</div>
+
+{% endblock %}

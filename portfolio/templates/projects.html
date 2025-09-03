@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Project Showcase{% endblock %}
+
+{% block content %}
+
+<!-- Projects Preview -->
+<div class="container my-5">
+  <h2 class="text-center mb-4">Featured Projects</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h2 class="card-title">KGL Inventory system</h2>
+          <p class="card-text">An inventory system mostly for tracking sales and stock built with Django and Bootstrap.</p>
+          <a href="/projects/kgl-inventory" class="btn btn-outline-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h2 class="card-title">E-Commerce Site</h2>
+          <p class="card-text">Technical assesssment about create responsive and validated forms.</p>
+          <br>
+          <a href="/projects/ecommerce-site" class="btn btn-outline-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h2 class="card-title">Portfolio Website</h2>
+          <p class="card-text">This website — built with Django, Bootstrap & love!</p>
+          <br>
+          <a href="/projects/portfolio" class="btn btn-outline-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Contact CTA -->
+<div class="container text-center my-5">
+  <br>
+  <h3>Have a project in mind?</h3>
+  <p>Let’s work together and make somethings great.</p>
+  <a href="/contact/" class="btn btn-outline-primary">Contact Me</a><br>
+  <br>
+</div>
+
+
+<!-- Footer 
+<footer class="bg-dark text-light text-center py-4 mt-5">
+  <div class="container">
+    <p class="mb-1">&copy; 2025 Elizabeth Agoa. All rights reserved.</p>
+    <p class="mb-1">Made with ❤️ using Django & Bootstrap</p>
+  </div>-->
+</footer>
+
+{% endblock %}
