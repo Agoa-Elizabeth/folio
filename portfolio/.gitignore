@@ -13,7 +13,6 @@ env/
 db.sqlite3
 media/
 staticfiles/
-static/
 
 # Environment & secrets
 *.env
