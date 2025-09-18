@@ -150,3 +150,17 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Render deployment settings - ADD THIS CODE
+if 'RENDER' in os.environ:
+    # Render specific settings
+    DEBUG = False
+    ALLOWED_HOSTS = ['folio-5-4345.onrender.com', 'localhost', '127.0.0.1']
+    
+    # Static files (WhiteNoise)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+else:
+    # Development settings
+    DEBUG = True
+    ALLOWED_HOSTS = []
