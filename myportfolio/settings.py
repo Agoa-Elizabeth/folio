@@ -14,6 +14,11 @@ import os
 from pathlib import Path
 import dj_database_url
 
+print("=== RENDER ENV VARIABLE ===")
+print(f"RENDER in os.environ: {'RENDER' in os.environ}")
+print(f"RENDER value: {os.environ.get('RENDER', 'NOT SET')}")
+print("===========================")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,13 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%f)p0)cf3hc$w(aso6ff&5azjk+m30t6f(748k_&xh^7z!ex+a'
+#SECURITY WARNING: keep the secret key used in production secret!
+#SECRET_KEY = 'django-insecure-%f)p0)cf3hc$w(aso6ff&5azjk+m30t6f(748k_&xh^7z!ex+a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+#DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+#ALLOWED_HOSTS = ["*"]
 
 
 
@@ -151,16 +156,16 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Render deployment settings - ADD THIS CODE
 if 'RENDER' in os.environ:
-    # Render specific settings
+
+# To this (more robust):
+    render_env = os.environ.get('RENDER') or os.environ.get('RENDER_EXTERNAL_URL')
+if render_env:
+    print("=== PRODUCTION SETTINGS ACTIVATED ===")
     DEBUG = False
     ALLOWED_HOSTS = ['folio-5-4345.onrender.com', 'localhost', '127.0.0.1']
-    
-    # Static files (WhiteNoise)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    # ... rest of production settings
 else:
-    # Development settings
+    print("=== DEVELOPMENT SETTINGS ACTIVE ===")
     DEBUG = True
     ALLOWED_HOSTS = []
