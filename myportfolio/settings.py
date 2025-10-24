@@ -77,15 +77,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Only add STATICFILES_DIRS if the directory exists
-static_dir = BASE_DIR / "portfolio" / "static"
-if static_dir.exists():
-    STATICFILES_DIRS = [static_dir]
-else:
-    STATICFILES_DIRS = []
+# Check if static directory exists before adding to STATICFILES_DIRS
+portfolio_static = BASE_DIR / "portfolio" / "static"
+STATICFILES_DIRS = []
+if portfolio_static.exists():
+    STATICFILES_DIRS.append(portfolio_static)
 
 # WhiteNoise storage for compression and caching
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
@@ -106,26 +108,31 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if 'RENDER' in os.environ:
     # Production settings for Render
     print("=== PRODUCTION SETTINGS ACTIVATED ===")
-    DEBUG = True,
+    DEBUG = True  # Temporarily True to see errors
     
-    # FIXED: Use the actual Render URL (without https://)
-    ALLOWED_HOSTS = [
-        'folio-5-4345.onrender.com',
-        'elizabeth.dev.onrender.com',
-        'localhost',
-        '127.0.0.1'
-    ]
+    # Allow all hosts temporarily for debugging
+    ALLOWED_HOSTS = ['*']
     
     SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-production')
     
     # Database configuration for production
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL'),
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
+    database_url = os.environ.get('DATABASE_URL')
+    if database_url:
+        DATABASES = {
+            'default': dj_database_url.config(
+                default=database_url,
+                conn_max_age=600,
+                conn_health_checks=True,
+            )
+        }
+    else:
+        # Fallback to SQLite if no DATABASE_URL (not recommended for production)
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
 else:
     # Local development settings
     print("=== DEVELOPMENT SETTINGS ACTIVE ===")
