@@ -108,10 +108,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if 'RENDER' in os.environ:
     # Production settings for Render
     print("=== PRODUCTION SETTINGS ACTIVATED ===")
-    DEBUG = True  # Temporarily True to see errors
+    DEBUG = False  
     
-    # Allow all hosts temporarily for debugging
-    ALLOWED_HOSTS = ['*']
+    # Use actual domain names
+    ALLOWED_HOSTS = [
+        'folio-5-4345.onrender.com',
+        '.onrender.com',
+    ]
     
     SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-production')
     
