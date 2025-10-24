@@ -10,9 +10,6 @@ print("===========================")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fallback-key-for-development'
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,7 +23,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # FIXED: Uncommented this
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -44,7 +41,6 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -54,14 +50,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'myportfolio.wsgi.application'
-
-# Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -85,18 +73,25 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# Static files - FIXED CONFIGURATION
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'portfolio/static'),
-]
 
-# WhiteNoise configuration
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Check if static directory exists before adding to STATICFILES_DIRS
+portfolio_static = BASE_DIR / "portfolio" / "static"
+STATICFILES_DIRS = []
+if portfolio_static.exists():
+    STATICFILES_DIRS.append(portfolio_static)
 
-# Default primary key field type
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# WhiteNoise storage for compression and caching (Django 4.2+ format)
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -107,25 +102,21 @@ EMAIL_HOST_USER = 'elizabethagoa@gmail.com'
 EMAIL_HOST_PASSWORD = 'hkcw cmip rsfg mbiq'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # Environment-specific settings
 if 'RENDER' in os.environ:
     # Production settings for Render
     print("=== PRODUCTION SETTINGS ACTIVATED ===")
-    DEBUG = False
+    DEBUG = False  # Back to False for production security
     
-    # Security settings for production
+    # Use actual domain names
     ALLOWED_HOSTS = [
         'folio-5-4345.onrender.com',
         '.onrender.com',
     ]
     
-    CSRF_TRUSTED_ORIGINS = [
-        'https://folio-5-4345.onrender.com',
-        'https://*.onrender.com',
-    ]
-    
-    # Use environment variable for secret key in production
-    SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-production')
     
     # Database configuration for production
     database_url = os.environ.get('DATABASE_URL')
@@ -137,14 +128,25 @@ if 'RENDER' in os.environ:
                 conn_health_checks=True,
             )
         }
-    
-    # Security headers
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    X_FRAME_OPTIONS = 'DENY'
-    
+    else:
+        # Fallback to SQLite if no DATABASE_URL (not recommended for production)
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
 else:
     # Local development settings
     print("=== DEVELOPMENT SETTINGS ACTIVE ===")
     DEBUG = True
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+    SECRET_KEY = 'django-insecure-%f)p0)cf3hc$w(aso6ff&5azjk+m30t6f(748k_&xh^7z!ex+a'
+    
+    # Database for local development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
