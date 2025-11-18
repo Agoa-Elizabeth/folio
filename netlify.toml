@@ -1,0 +1,6 @@
+[build]
+  publish = "staticfiles"
+  command = "python manage.py collectstatic --noinput"
+
+[build.environment]
+  PYTHON_VERSION = "3.12"
