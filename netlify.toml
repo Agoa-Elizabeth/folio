@@ -1,6 +1,7 @@
 [build]
-  publish = "staticfiles"
-  command = "python manage.py collectstatic --noinput"
+  publish = "dist"
+  command = "python build_static.py"
 
 [build.environment]
   PYTHON_VERSION = "3.12"
+  DJANGO_SETTINGS_MODULE = "myportfolio.settings"
